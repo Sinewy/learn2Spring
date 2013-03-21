@@ -3,12 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--we can use autowire byName - this means spring will check the names of other beans and inject them-->
-    <!--in the place of properties - names of properties and beans have to match exactly -->
-    <!--autowire byType only works if we have only one bean of one type-->
-    <!--autowire by construcor can also be used - it does contriuctur inject - again only one bean per type-->
-    <!--would not be recommended for a bigger number of beans-->
-    <bean id="triangle" class="com.dzure.spring.model.Triangle" autowire="byName"/>
+
+    <!--define scope for BEAN with scope atribute-->
+    <bean id="triangle" class="com.dzure.spring.model.Triangle" autowire="byName" scope="prototype"/>
 
     <bean id="pointA" class="com.dzure.spring.model.Point">
         <property name="x" value="0" />
