@@ -15,7 +15,6 @@ public class MainSpring {
     public static void main(String[] args) {
 
         //Triangle triangle = new Triangle();
-
         ApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml");
         Triangle triangle= (Triangle) context.getBean("triangle");
         triangle.draw();
