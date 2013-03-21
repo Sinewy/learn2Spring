@@ -4,47 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="mainTriangle" class="com.dzure.spring.model.Triangle">
-        <property name="points">
-            <list>
-                <ref bean="pointA" />
-            </list>
-        </property>
-    </bean>
-
-    <!--this will override the previous list-->
-    <bean id="triangle1" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
-        <property name="points">
-            <list>
-                <ref bean="pointB" />
-            </list>
-        </property>
-    </bean>
-
-    <!--this will add values to the previous list-->
-    <bean id="triangle1" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
-        <property name="points">
-            <list merge="true">
-                <ref bean="pointB" />
-            </list>
-        </property>
-    </bean>
-
-
-    <bean id="mainTriangle" class="com.dzure.spring.model.Triangle">
+    <bean id="triangle" class="com.dzure.spring.model.Triangle">
         <property name="pointA" ref="pointA" />
-    </bean>
-
-    <bean id="triangle1" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
         <property name="pointB" ref="pointB" />
-        <property name="pointC" ref="pointC" />
-    </bean>
-
-    <bean id="triangle2" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
-        <property name="pointB" ref="pointB" />
-    </bean>
-
-    <bean id="triangle3" class="com.dzure.spring.model.Triangle" parent="triangle2">
         <property name="pointC" ref="pointC" />
     </bean>
 

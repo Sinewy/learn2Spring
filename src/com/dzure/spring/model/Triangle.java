@@ -1,9 +1,7 @@
 package com.dzure.spring.model;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,22 +9,18 @@ import org.springframework.context.ApplicationContextAware;
  * Date: 3/21/13
  * Time: 2:33 PM
  */
-public class Triangle implements ApplicationContextAware, BeanNameAware {
+
+/**
+ * One way to write init and destroy methods is to implement the following interfaces.
+ * This will make you implement the methods below.
+ * The downside of this is that we are bind to spring - we are using the methods of spring and
+ * we have to implement and change them in out code.
+ */
+public class Triangle implements InitializingBean, DisposableBean {
 
     private Point pointA;
     private Point pointB;
     private Point pointC;
-
-    /**
-     * We can use interfaces ApplicationContextAware, BeanNameAware and others to enable
-     * certain functionality in a bean. For example ApplicationContextAware makes context available
-     * in the bean and we can get other beans inside with getBean method.
-     * If we want to know the name that is used in spring configuration we can simply use
-     * BeanNameAware interface and get the names.
-     */
-
-    private ApplicationContext context = null;
-    private String beanName;
 
     public Point getPointA() {
         return pointA;
@@ -59,14 +53,20 @@ public class Triangle implements ApplicationContextAware, BeanNameAware {
         System.out.println("Point C: " + getPointC().getX() + ", " + getPointC().getY());
     }
 
+    /**
+     * This method will be called right after the bean is initialized.
+     */
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("Initializing bean for Triangle.");
     }
 
+    /**
+     * This method is called just before the bean is destroyed.
+     */
     @Override
-    public void setBeanName(String s) {
-        this.beanName = s;
-        System.out.println("Bean name is: " + s);
+    public void destroy() throws Exception {
+        System.out.println("The bean for Triangle just being destroyed.");
     }
+
 }

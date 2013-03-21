@@ -1,7 +1,7 @@
 package com.dzure.spring;
 
 import com.dzure.spring.model.Triangle;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -15,9 +15,10 @@ public class MainSpring {
     public static void main(String[] args) {
 
         //Triangle triangle = new Triangle();
-        ApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml");
+        //ApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml");
+        AbstractApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml");
         Triangle triangle= (Triangle) context.getBean("triangle");
         triangle.draw();
-
+        context.registerShutdownHook();
     }
 }
