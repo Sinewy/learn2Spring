@@ -4,8 +4,49 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!--define scope for BEAN with scope atribute-->
-    <bean id="triangle" class="com.dzure.spring.model.Triangle" autowire="byName" scope="prototype"/>
+    <bean id="mainTriangle" class="com.dzure.spring.model.Triangle">
+        <property name="points">
+            <list>
+                <ref bean="pointA" />
+            </list>
+        </property>
+    </bean>
+
+    <!--this will override the previous list-->
+    <bean id="triangle1" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
+        <property name="points">
+            <list>
+                <ref bean="pointB" />
+            </list>
+        </property>
+    </bean>
+
+    <!--this will add values to the previous list-->
+    <bean id="triangle1" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
+        <property name="points">
+            <list merge="true">
+                <ref bean="pointB" />
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="mainTriangle" class="com.dzure.spring.model.Triangle">
+        <property name="pointA" ref="pointA" />
+    </bean>
+
+    <bean id="triangle1" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
+        <property name="pointB" ref="pointB" />
+        <property name="pointC" ref="pointC" />
+    </bean>
+
+    <bean id="triangle2" class="com.dzure.spring.model.Triangle" parent="mainTriangle">
+        <property name="pointB" ref="pointB" />
+    </bean>
+
+    <bean id="triangle3" class="com.dzure.spring.model.Triangle" parent="triangle2">
+        <property name="pointC" ref="pointC" />
+    </bean>
 
     <bean id="pointA" class="com.dzure.spring.model.Point">
         <property name="x" value="0" />
