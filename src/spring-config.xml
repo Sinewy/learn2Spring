@@ -3,25 +3,36 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
     <bean id="triangle" class="com.dzure.spring.model.Triangle" >
-        <property name="pointA" ref="pointA" />
-        <property name="pointB" ref="pointB" />
-        <property name="pointC" ref="pointC" />
+        <!--<property name="pointA" ref="zeroPoint" />-->
+        <property name="pointA">
+            <!--IDREF could be used to add extra safety-->
+            <idref bean="zeroPoint"/>
+        </property>
+
+        <property name="pointB">
+            <!--inner beans - can not be used by other objects - no need for ID -->
+            <bean class="com.dzure.spring.model.Point">
+                <property name="x" value="-20" />
+                <property name="y" value="0" />
+            </bean>
+        </property>
+        <property name="pointC">
+            <bean class="com.dzure.spring.model.Point">
+                <property name="x" value="0" />
+                <property name="y" value="20" />
+            </bean>
+        </property>
     </bean>
 
-    <bean id="pointA" class="com.dzure.spring.model.Point">
+    <!--normal bean - can be used by other objects-->
+    <bean id="zeroPoint" class="com.dzure.spring.model.Point">
         <property name="x" value="0" />
         <property name="y" value="0" />
     </bean>
 
-    <bean id="pointB" class="com.dzure.spring.model.Point">
-        <property name="x" value="-20" />
-        <property name="y" value="0" />
-    </bean>
-
-    <bean id="pointC" class="com.dzure.spring.model.Point">
-        <property name="x" value="0" />
-        <property name="y" value="20" />
-    </bean>
+    <!--you can give a lot of aliases to one bean and reference the objecet by all his aliases-->
+    <alias name="triangle" alias="triangleAlias" />
 
 </beans>
