@@ -1,6 +1,8 @@
 package com.dzure.spring;
 
 import com.dzure.spring.model.Triangle;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +14,10 @@ public class MainSpring {
 
     public static void main(String[] args) {
 
-        Triangle triangle = new Triangle();
+        //Triangle triangle = new Triangle();
+
+        ApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml");
+        Triangle triangle= (Triangle) context.getBean("triangle");
         triangle.draw();
 
     }
