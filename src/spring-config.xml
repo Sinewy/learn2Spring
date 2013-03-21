@@ -4,13 +4,24 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="triangle" class="com.dzure.spring.model.Triangle" >
-        <!--<property name="type" value="Equilateral" />                      setter injection       -->
-        <!--<constructor-arg value="OtherType" />                             constructor injection  -->
-        <!--<constructor-arg value="20" />                                    constructor injection  -->
-        <!--<constructor-arg type="int" value="20" />                         constructor injection  -->
-        <!--<constructor-arg type="java.lang.String" value="20" />            constructor injection  -->
-        <constructor-arg index="0" value="SomeType" />                   <!-- constructor injection  -->
-        <constructor-arg index="1" value="20" />                         <!-- constructor injection  -->
+        <property name="pointA" ref="pointA" />
+        <property name="pointB" ref="pointB" />
+        <property name="pointC" ref="pointC" />
+    </bean>
+
+    <bean id="pointA" class="com.dzure.spring.model.Point">
+        <property name="x" value="0" />
+        <property name="y" value="0" />
+    </bean>
+
+    <bean id="pointB" class="com.dzure.spring.model.Point">
+        <property name="x" value="-20" />
+        <property name="y" value="0" />
+    </bean>
+
+    <bean id="pointC" class="com.dzure.spring.model.Point">
+        <property name="x" value="0" />
+        <property name="y" value="20" />
     </bean>
 
 </beans>
