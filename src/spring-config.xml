@@ -4,7 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="triangle" class="com.dzure.spring.model.Triangle" >
-        <property name="type" value="Equilateral" />
+        <!--<property name="type" value="Equilateral" />                      setter injection       -->
+        <!--<constructor-arg value="OtherType" />                             constructor injection  -->
+        <!--<constructor-arg value="20" />                                    constructor injection  -->
+        <!--<constructor-arg type="int" value="20" />                         constructor injection  -->
+        <!--<constructor-arg type="java.lang.String" value="20" />            constructor injection  -->
+        <constructor-arg index="0" value="SomeType" />                   <!-- constructor injection  -->
+        <constructor-arg index="1" value="20" />                         <!-- constructor injection  -->
     </bean>
 
 </beans>
