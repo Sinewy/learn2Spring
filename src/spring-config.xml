@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--if we make all INIT and DESTROY methos the same name - for all beans... we can define this globally-->
-<!--if the method with the given name is not fount it is simply ignored.-->
-<!--globals are defined inside BEANS tag with default-init-method and default-destroy-method-->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-       default-init-method="myInit"
-       default-destroy-method="myDestroy">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--define the init and destroy methods to be called - our own methods-->
-    <!--if global init and destroy methods are set, local will override-->
-    <bean id="triangle" class="com.dzure.spring.model.Triangle" init-method="myInit" destroy-method="myDestroy">
+    <bean id="triangle" class="com.dzure.spring.model.Triangle">
         <property name="pointA" ref="pointA" />
         <property name="pointB" ref="pointB" />
         <property name="pointC" ref="pointC" />
@@ -31,5 +24,11 @@
         <property name="x" value="0" />
         <property name="y" value="20" />
     </bean>
+
+    <!--because it is not referenced - it is not a dependency, and because it does not have-->
+    <!--any configuration we do not need to give it an ID-->
+    <!--we could have multiple beans - in this case we can specify the order in which they are executed-->
+    <!--bean post processors are very helpful if you want to make changes in configuration/init process-->
+    <bean class="com.dzure.spring.model.DisplayNameBeanPostProcessor" />
 
 </beans>
