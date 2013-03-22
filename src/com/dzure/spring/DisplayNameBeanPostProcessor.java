@@ -1,4 +1,4 @@
-package com.dzure.spring.model;
+package com.dzure.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

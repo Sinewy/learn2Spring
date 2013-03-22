@@ -10,6 +10,14 @@
         <property name="pointC" ref="pointC" />
     </bean>
 
+    <bean id="circle" class="com.dzure.spring.model.Circle">
+        <property name="center" ref="pointA" />
+    </bean>
+
+    <bean id="shape" class="com.dzure.spring.model.Circle">
+        <property name="center" ref="pointB" />
+    </bean>
+
     <bean id="pointA" class="com.dzure.spring.model.Point">
         <property name="x" value="${pointA.x}" />
         <property name="y" value="${pointA.y}" />
@@ -29,9 +37,9 @@
     <!--any configuration we do not need to give it an ID-->
     <!--we could have multiple beans - in this case we can specify the order in which they are executed-->
     <!--bean post processors are very helpful if you want to make changes in configuration/init process-->
-    <bean class="com.dzure.spring.model.DisplayNameBeanPostProcessor" />
+    <bean class="com.dzure.spring.DisplayNameBeanPostProcessor" />
 
-    <bean class="com.dzure.spring.model.MyBeanFactoryPP" />
+    <bean class="com.dzure.spring.MyBeanFactoryPP" />
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="pointsConfig.properties" />

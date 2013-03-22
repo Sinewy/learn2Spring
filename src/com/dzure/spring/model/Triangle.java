@@ -7,7 +7,7 @@ package com.dzure.spring.model;
  * Time: 2:33 PM
  */
 
-public class Triangle {
+public class Triangle implements Shape {
 
     private Point pointA;
     private Point pointB;
@@ -37,6 +37,7 @@ public class Triangle {
         this.pointC = pointC;
     }
 
+    @Override
     public void draw() {
         System.out.println("Triangle was drawn.");
         System.out.println("Point A: " + getPointA().getX() + ", " + getPointA().getY());
