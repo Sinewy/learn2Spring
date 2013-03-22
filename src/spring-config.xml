@@ -31,4 +31,6 @@
     <!--bean post processors are very helpful if you want to make changes in configuration/init process-->
     <bean class="com.dzure.spring.model.DisplayNameBeanPostProcessor" />
 
+    <bean class="com.dzure.spring.model.MyBeanFactoryPP" />
+
 </beans>
