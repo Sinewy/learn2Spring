@@ -11,8 +11,8 @@
     </bean>
 
     <bean id="pointA" class="com.dzure.spring.model.Point">
-        <property name="x" value="0" />
-        <property name="y" value="0" />
+        <property name="x" value="${pointA.x}" />
+        <property name="y" value="${pointA.y}" />
     </bean>
 
     <bean id="pointB" class="com.dzure.spring.model.Point">
@@ -32,5 +32,9 @@
     <bean class="com.dzure.spring.model.DisplayNameBeanPostProcessor" />
 
     <bean class="com.dzure.spring.model.MyBeanFactoryPP" />
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="pointsConfig.properties" />
+    </bean>
 
 </beans>
