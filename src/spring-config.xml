@@ -15,6 +15,11 @@
     </bean>
 
     <bean id="shape" class="com.dzure.spring.model.Circle">
+        <!--if we comment this out we get null pointer exception - no other info-->
+        <!--Exception in thread "main" java.lang.NullPointerException-->
+        <!--if we user @Required annotation spring gives us exception where it tells us-->
+        <!--what excatly is missing-->
+        <!--Caused by: org.springframework.beans.factory.BeanInitializationException: Property 'center' is required for bean 'shape'-->
         <property name="center" ref="pointB" />
     </bean>
 
@@ -33,13 +38,10 @@
         <property name="y" value="20" />
     </bean>
 
-    <!--because it is not referenced - it is not a dependency, and because it does not have-->
-    <!--any configuration we do not need to give it an ID-->
-    <!--we could have multiple beans - in this case we can specify the order in which they are executed-->
-    <!--bean post processors are very helpful if you want to make changes in configuration/init process-->
-    <bean class="com.dzure.spring.DisplayNameBeanPostProcessor" />
-
-    <bean class="com.dzure.spring.MyBeanFactoryPP" />
+    <!--regired bean post processor for @Required annotation which nakes sure that all-->
+    <!--requred properties or beans are set/wired in spring config - it also throws a better -->
+    <!--log - exception - tells us what is missing-->
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="pointsConfig.properties" />

@@ -1,5 +1,7 @@
 package com.dzure.spring.model;
 
+import org.springframework.beans.factory.annotation.Required;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jurez
@@ -8,12 +10,14 @@ package com.dzure.spring.model;
  */
 public class Circle implements Shape {
 
+
     private Point center;
 
     public Point getCenter() {
         return center;
     }
 
+    @Required
     public void setCenter(Point center) {
         this.center = center;
     }
