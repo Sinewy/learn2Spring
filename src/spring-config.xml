@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xmlns:context="http://www.springframework.org/schema/tool"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd"-->
+        <!-->-->
 
-    <bean id="triangle" class="com.dzure.spring.model.Triangle">
-        <property name="pointA" ref="pointA" />
-        <property name="pointB" ref="pointB" />
-        <property name="pointC" ref="pointC" />
-    </bean>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="circle" class="com.dzure.spring.model.Circle">
-        <property name="center" ref="pointA" />
-    </bean>
+        <bean id="circle" class="com.dzure.spring.model.Circle" />
 
-    <bean id="shape" class="com.dzure.spring.model.Circle">
-        <!--if we comment this out we get null pointer exception - no other info-->
-        <!--Exception in thread "main" java.lang.NullPointerException-->
-        <!--if we user @Required annotation spring gives us exception where it tells us-->
-        <!--what excatly is missing-->
-        <!--Caused by: org.springframework.beans.factory.BeanInitializationException: Property 'center' is required for bean 'shape'-->
-        <property name="center" ref="pointB" />
-    </bean>
+        <bean id="shape" class="com.dzure.spring.model.Circle" />
+
+        <!-- annotation @Autowired will wolr if there is only one bean of the needed type, in other case there will be exception-->
+    <!--Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [com.dzure.spring.model.Point]-->
+    <!--is defined: expected single matching bean but found 3: pointA,pointB,pointC-->
+    <!--If we change the name of one point to center... it all works again... if there are multiple beans pf the same type, spring also checks the-->
+    <!--name of the bean.. and it it matches the property.. it will wire it.-->
 
     <bean id="pointA" class="com.dzure.spring.model.Point">
         <property name="x" value="${pointA.x}" />
         <property name="y" value="${pointA.y}" />
     </bean>
 
+
+    <!--If there are multiple beans of the same type and none of them is matching the property by name, there is another way we can-->
+    <!--make sure the beans get wired,... we can use QUALIFIERs-->
     <bean id="pointB" class="com.dzure.spring.model.Point">
+        <qualifier value="circleRelated" />
         <property name="x" value="-20" />
         <property name="y" value="10" />
     </bean>
@@ -38,10 +46,18 @@
         <property name="y" value="20" />
     </bean>
 
+    <!--bean post processor that is used for @Autowired-->
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
     <!--regired bean post processor for @Required annotation which nakes sure that all-->
     <!--requred properties or beans are set/wired in spring config - it also throws a better -->
     <!--log - exception - tells us what is missing-->
-    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+    <!--<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />-->
+
+    <!--As we have seen.. if we want to use annotations we need to mention the appropriate bean post processor.-->
+    <!--For each type of annotation its own.. But there is a shortcut. -->
+    <!--If we want to use annotations.. al sorts of spring annotations we can just say the following:-->
+    <context:annotation-config />
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="pointsConfig.properties" />

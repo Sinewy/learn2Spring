@@ -1,6 +1,7 @@
 package com.dzure.spring.model;
 
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +18,9 @@ public class Circle implements Shape {
         return center;
     }
 
-    @Required
+    //@Required
+    @Autowired
+    @Qualifier("circleRelated")
     public void setCenter(Point center) {
         this.center = center;
     }
