@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-       <!--xmlns:context="http://www.springframework.org/schema/tool"-->
-       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd"-->
-        <!-->-->
-
 <beans  xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:p="http://www.springframework.org/schema/p"
@@ -21,17 +15,10 @@
 
         <bean id="shape" class="com.dzure.spring.model.Circle" />
 
-        <!-- annotation @Autowired will wolr if there is only one bean of the needed type, in other case there will be exception-->
-    <!--Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [com.dzure.spring.model.Point]-->
-    <!--is defined: expected single matching bean but found 3: pointA,pointB,pointC-->
-    <!--If we change the name of one point to center... it all works again... if there are multiple beans pf the same type, spring also checks the-->
-    <!--name of the bean.. and it it matches the property.. it will wire it.-->
-
     <bean id="pointA" class="com.dzure.spring.model.Point">
         <property name="x" value="${pointA.x}" />
         <property name="y" value="${pointA.y}" />
     </bean>
-
 
     <!--If there are multiple beans of the same type and none of them is matching the property by name, there is another way we can-->
     <!--make sure the beans get wired,... we can use QUALIFIERs-->
@@ -45,14 +32,6 @@
         <property name="x" value="0" />
         <property name="y" value="20" />
     </bean>
-
-    <!--bean post processor that is used for @Autowired-->
-    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-
-    <!--regired bean post processor for @Required annotation which nakes sure that all-->
-    <!--requred properties or beans are set/wired in spring config - it also throws a better -->
-    <!--log - exception - tells us what is missing-->
-    <!--<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />-->
 
     <!--As we have seen.. if we want to use annotations we need to mention the appropriate bean post processor.-->
     <!--For each type of annotation its own.. But there is a shortcut. -->
