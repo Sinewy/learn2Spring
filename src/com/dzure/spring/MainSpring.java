@@ -16,7 +16,8 @@ public class MainSpring {
 
         AbstractApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml");
         context.registerShutdownHook();
-        Shape shape = (Shape) context.getBean("shape");
+        //Shape shape = (Shape) context.getBean("shape");
+        Shape shape = (Shape) context.getBean("circle");
         shape.draw();
 
     }

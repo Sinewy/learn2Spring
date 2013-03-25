@@ -1,5 +1,7 @@
 package com.dzure.spring.model;
 
+import org.springframework.stereotype.Controller;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -10,6 +12,19 @@ import javax.annotation.Resource;
  * Date: 3/22/13
  * Time: 10:02 AM
  */
+
+/**
+ * This annotation defines this class as a bean in spring... this means we do not need
+ * this circle bean to be defined in spring xml file.
+ * The problem of annotation style is that you cannot have multiple instances of this class.
+ * More different behaviours/beans of the same class.
+ *
+ * In EE development we have different types of beans and we can mark them with Stereotype Annotations:
+ * @Service, @Repository (this means data), @Controller - no different as @Component, it only gives some
+ * additional information, also documentation benefits
+ */
+//@Component
+@Controller
 public class Circle implements Shape {
 
 

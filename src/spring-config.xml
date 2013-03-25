@@ -11,10 +11,6 @@
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-        <bean id="circle" class="com.dzure.spring.model.Circle" />
-
-        <bean id="shape" class="com.dzure.spring.model.Circle" />
-
     <bean id="pointA" class="com.dzure.spring.model.Point">
         <property name="x" value="${pointA.x}" />
         <property name="y" value="${pointA.y}" />
@@ -37,6 +33,10 @@
     <!--For each type of annotation its own.. But there is a shortcut. -->
     <!--If we want to use annotations.. al sorts of spring annotations we can just say the following:-->
     <context:annotation-config />
+
+    <!--if we are using annotation for defining beans we need to let spring know that there are beans in our code.-->
+    <!--we need to tel spring to scan certain places for beans-->
+    <context:component-scan base-package="com.dzure.spring" />
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="pointsConfig.properties" />
