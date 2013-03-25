@@ -1,6 +1,9 @@
 package com.dzure.spring.model;
 
+import com.dzure.spring.DrawEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 
@@ -28,11 +31,11 @@ import java.util.Locale;
  */
 //@Component
 @Controller
-public class Circle implements Shape {
+public class Circle implements Shape, ApplicationEventPublisherAware {
 
 
     private Point center;
-
+    private ApplicationEventPublisher publisher;
 
     /**
      * To get message in out beans we can as well use application context
@@ -76,6 +79,14 @@ public class Circle implements Shape {
         System.out.println(messageSource.getMessage("drawing.point", new Object[]{center.getX(), center.getY()}, "default", Locale.ENGLISH));
         // Need to check how to add my own locale versions.
         System.out.println(messageSource.getMessage("drawing.point", new Object[]{center.getX(), center.getY()}, "default", Locale.GERMAN));
+        /**
+         * To use our own event we need to publish it.
+         * Spring has to set the publisher in order to use it and publish events.
+         * We need to implement ApplicationEventPublicherAware
+         */
+        DrawEvent drawEvent = new DrawEvent(this);
+        publisher.publishEvent(drawEvent);
+
     }
 
     /**
@@ -94,5 +105,11 @@ public class Circle implements Shape {
     @PreDestroy
     public void myDestroyMethodCircle() {
         System.out.println("My destory method is called - circle destroyed");
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        // spring gives us application context publisher - we assign it to our local publisher
+        this.publisher = applicationEventPublisher;
     }
 }
