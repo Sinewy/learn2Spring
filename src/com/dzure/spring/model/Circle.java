@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -64,9 +65,17 @@ public class Circle implements Shape {
 
     @Override
     public void draw() {
-        System.out.println("Drawing the circle");
-        System.out.println("The point values are: " + center.getX() + ", " + center.getY());
+        //System.out.println("Drawing the circle");
+        //System.out.println("The point values are: " + center.getX() + ", " + center.getY());
         System.out.println("Print the message: " + messageSource.getMessage("greeting", null, "default", null));
+        System.out.println("Print the message: " + messageSource.getMessage("greeting", null, "default", Locale.ENGLISH));
+        System.out.println("Print the message: " + messageSource.getMessage("greeting", null, "default", Locale.GERMAN));
+        System.out.println(messageSource.getMessage("drawing.circe", null, "default", Locale.ENGLISH));
+        System.out.println(messageSource.getMessage("drawing.circe", null, "default", Locale.GERMAN));
+        System.out.println(messageSource.getMessage("drawing.point", new Object[]{center.getX(), center.getY()}, "default", null));
+        System.out.println(messageSource.getMessage("drawing.point", new Object[]{center.getX(), center.getY()}, "default", Locale.ENGLISH));
+        // Need to check how to add my own locale versions.
+        System.out.println(messageSource.getMessage("drawing.point", new Object[]{center.getX(), center.getY()}, "default", Locale.GERMAN));
     }
 
     /**
