@@ -1,5 +1,7 @@
 package com.dzure.spring.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
@@ -30,6 +32,22 @@ public class Circle implements Shape {
 
     private Point center;
 
+
+    /**
+     * To get message in out beans we can as well use application context
+     * or we can autowire (wire by type) this bean - defined in spring xml
+     */
+    @Autowired
+    private MessageSource messageSource;
+
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
+
     public Point getCenter() {
         return center;
     }
@@ -48,6 +66,7 @@ public class Circle implements Shape {
     public void draw() {
         System.out.println("Drawing the circle");
         System.out.println("The point values are: " + center.getX() + ", " + center.getY());
+        System.out.println("Print the message: " + messageSource.getMessage("greeting", null, "default", null));
     }
 
     /**

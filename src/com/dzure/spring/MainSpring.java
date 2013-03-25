@@ -20,5 +20,10 @@ public class MainSpring {
         Shape shape = (Shape) context.getBean("circle");
         shape.draw();
 
+        /**
+         * Getting message from properties file via application context.
+         */
+        System.out.println(context.getMessage("greeting", null, "default - hey man", null));
+
     }
 }

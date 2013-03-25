@@ -42,4 +42,16 @@
         <property name="locations" value="pointsConfig.properties" />
     </bean>
 
+    <!--To use messages from a properties file in out application spring helps us with message source -->
+    <!--We need to define this bean and get it throug application context-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <!--file name of our property file - if we have more, we can list all of them-->
+                <value>messages</value>
+            </list>
+        </property>
+
+    </bean>
+
 </beans>
